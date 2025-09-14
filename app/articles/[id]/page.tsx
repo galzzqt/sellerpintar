@@ -10,14 +10,20 @@ import { UserDropdown } from "@/components/UserDropdown"
 import { useAuth } from "@/contexts/AuthContext"
 import { apiClient, Article, formatApiDate } from "@/lib/api"
 
-export default function ArticleDetailPage({ params }: { params: { id: string } }) {
+export default async function ArticleDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const articleId = parseInt(id)
+  
+  return <ArticleDetailClient articleId={articleId} />
+}
+
+function ArticleDetailClient({ articleId }: { articleId: number }) {
   const router = useRouter()
   const { isAuthenticated, isLoading: authLoading, user } = useAuth()
   const [article, setArticle] = useState<Article | null>(null)
   const [relatedArticles, setRelatedArticles] = useState<Article[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const articleId = parseInt(params.id)
 
   // Redirect if not authenticated
   useEffect(() => {
