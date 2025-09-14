@@ -130,6 +130,8 @@ export interface LoginResponse {
     username: string
     role: string
     email?: string
+    created_at: string
+    updated_at: string
   }
 }
 
@@ -147,6 +149,8 @@ export interface RegisterResponse {
     username: string
     role: string
     email?: string
+    created_at: string
+    updated_at: string
   }
 }
 
@@ -897,6 +901,8 @@ const MockAuth = {
           username: user.username,
           role: user.role,
           email: user.email,
+          created_at: user.created_at,
+          updated_at: user.updated_at,
         }
       }
     }
@@ -930,6 +936,8 @@ const MockAuth = {
           username: newUser.username,
           role: newUser.role,
           email: newUser.email,
+          created_at: newUser.created_at,
+          updated_at: newUser.updated_at,
         }
       }
     }

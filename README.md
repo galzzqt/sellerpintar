@@ -1,6 +1,6 @@
-# SellerPintar - Aplikasi Blog Full-Stack
+# SellerPintar
 
-Aplikasi blog modern yang dibangun dengan NextJS, Tailwind CSS, dan komponen Shadcn/ui, terintegrasi dengan API SellerPintar.
+Aplikasi artikel blog yang dibangun dengan NextJS, Tailwind CSS, dan komponen Shadcn/ui, terintegrasi dengan API SellerPintar.
 
 ## Fitur
 

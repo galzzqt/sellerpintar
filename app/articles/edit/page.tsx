@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { ArrowLeft, Upload, Eye, X, Bold, Italic, Link as LinkIcon, AlignLeft, AlignCenter, AlignRight, AlignJustify, Undo, Redo, Trash2 } from "lucide-react"
@@ -21,12 +21,24 @@ import { apiClient, Article } from "@/lib/api"
 
 const categories = ["Technology", "Design", "Development", "AI", "Web3"]
 
-export default function EditArticlePage() {
+function EditArticleContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { user, isAuthenticated, isLoading: authLoading } = useAuth()
   const articleId = searchParams.get('id')
+
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EditArticleForm articleId={articleId} />
+    </Suspense>
+  )
+}
+
+function EditArticleForm({ articleId }: { articleId: string | null }) {
+  const router = useRouter()
+  const { user, isAuthenticated, isLoading: authLoading } = useAuth()
   
+  // Form state
   const [title, setTitle] = useState("")
   const [category, setCategory] = useState("")
   const [content, setContent] = useState("")
@@ -518,5 +530,13 @@ export default function EditArticlePage() {
         </div>
       )}
     </div>
+  )
+}
+
+export default function EditArticlePage() {
+  return (
+    <Suspense fallback={<div>Loading article editor...</div>}>
+      <EditArticleContent />
+    </Suspense>
   )
 }
